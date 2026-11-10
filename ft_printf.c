@@ -6,7 +6,7 @@
 /*   By: irabelo <irabelo@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/09 19:37:01 by irabelo           #+#    #+#             */
-/*   Updated: 2026/11/09 21:22:12 by irabelo          ###   ########.fr       */
+/*   Updated: 2026/11/10 18:02:59 by irabelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,57 +36,84 @@
 
 */
 
-size_t	ft_get_type(const char *format)
+static void	ft_putnbr_hex_fd(int n, int fd)
 {
-	while (*format)
+	(void)n;
+	(void)fd;
+}
+
+static void	ft_putunbr_fd(unsigned int n, int fd)
+{
+	unsigned long	num;
+
+	num = (long)n;
+	if (num > 9)
 	{
-		if (ft_strchr(format, '%')
-			&& ft_strchr(format + 1, 'c')
-			&& *format + 1 != '\0')
-			return (sizeof(char));
-		if (ft_strchr(format, '%')
-			&& ft_strchr(format + 1, 's')
-			&& *format + 1 != '\0')
-			return (sizeof(char *));
-		if (ft_strchr(format, '%')
-			&& ft_strchr(format + 1, 'p')
-			&& *format + 1 != '\0')
-			return (sizeof(void *));
-		if (ft_strchr(format, '%')
-			&& ft_strchr(format + 1, 'd')
-			&& *format + 1 != '\0')
-			return (sizeof(int));
-		if (ft_strchr(format, '%')
-			&& ft_strchr(format + 1, 'i')
-			&& *format + 1 != '\0')
-			return (sizeof(int));
-		if (ft_strchr(format, '%')
-			&& ft_strchr(format + 1, 'u')
-			&& *format + 1 != '\0')
-			return (sizeof(unsigned int));
-		if (ft_strchr(format, '%')
-			&& ft_strchr(format + 1, 'x')
-			&& *format + 1 != '\0')
-			return (16);
-		if (ft_strchr(format, '%')
-			&& ft_strchr(format + 1, 'X')
-			&& *format + 1 != '\0')
-			return (16);
+		ft_putunbr_fd(num / 10, fd);
+		ft_putchar_fd((num % 10) + '0', fd);
 	}
-	return (0);
+	else
+		ft_putchar_fd(num + '0', fd);
 }
 
 int	ft_printf(const char *format, ...)
 {
-	va_list	ap;
-	
-	va_start(ap, format);
-	va_end(ap);
+	va_list	args;
+	size_t	offset;
+
+	va_start(args, format);
+	offset = 0;
+	while (format[offset])
+	{
+		ft_putchar_fd(format[offset], STDOUT_FILENO);
+		if (format[offset + 1] == '%' && format[offset + 2] == '%')
+		{
+			ft_putchar_fd('%', STDOUT_FILENO);
+			offset += 2;
+		}
+		if (format[offset + 1] == '%' && format[offset + 2] == 'c')
+		{
+			ft_putchar_fd(va_arg(args, int), STDOUT_FILENO);
+			offset += 2;
+		}
+		else if (format[offset + 1] == '%' && format[offset + 2] == 's')
+		{
+			ft_putstr_fd(va_arg(args, char *), STDOUT_FILENO);
+			offset += 2;
+		}
+		else if (format[offset + 1] == '%' && format[offset + 2] == 'p')
+		{
+			offset += 2;
+		}
+		else if (format[offset + 1] == '%' && (format[offset + 2] == 'd' || format[offset + 2] == 'i'))
+		{
+			ft_putnbr_fd(va_arg(args, int), STDOUT_FILENO);	
+			offset += 2;
+		}
+		else if (format[offset + 1] == '%' && format[offset + 2] == 'u')
+		{
+			ft_putunbr_fd(va_arg(args, unsigned int), STDOUT_FILENO);
+			offset += 2;
+		}
+		else if (format[offset + 1] == '%' && format[offset + 2] == 'x')
+		{
+			ft_putnbr_hex_fd(va_arg(args, unsigned int), STDOUT_FILENO);
+			offset += 2;
+		}
+		else if (format[offset + 1] == '%' && format[offset + 2] == 'X')
+		{
+			ft_putnbr_hex_fd(va_arg(args, unsigned int), STDOUT_FILENO);
+			offset += 2;
+		}
+		offset++;
+	}
+	va_end(args);
 	return (0);
 }
 
 int	main(void)
 {
-	printf("%zu\n", ft_get_type("test %c"));
+	ft_printf("checking: %d %c %s %u \\ %%\n", -100, 'c', "Hello, World!", 42);
+	printf("checking: %d %c %s %u \\ %%\n", -100, 'c', "Hello, World!", 42);
 	return (0);
 }
