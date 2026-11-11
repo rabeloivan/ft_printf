@@ -5,7 +5,8 @@ CFLAGS	= -Wall -Wextra -Werror
 AR		= ar rcs
 RM		= rm -rf
 
-SRCS	= ft_printf.c $(addprefix srcs/, $(addsuffix .c, ft_putchar ft_putstr ft_putnbr ft_putunbr ft_puthex))
+SRCS	= ft_printf.c $(addprefix srcs/, $(addsuffix .c, ft_putchar ft_putstr \
+          ft_putnbr ft_putunbr ft_puthex ft_putptr))
 
 OBJS	= $(SRCS:.c=.o)
 

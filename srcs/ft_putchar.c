@@ -6,7 +6,7 @@
 /*   By: irabelo <irabelo@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/10 21:22:21 by irabelo           #+#    #+#             */
-/*   Updated: 2026/11/11 17:22:18 by irabelo          ###   ########.fr       */
+/*   Updated: 2026/11/11 21:26:18 by irabelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,5 @@
 
 int	ft_putchar(char c)
 {
-	ssize_t	len;
-
-	len = write(STDOUT_FILENO, &c, 1);
-	return (len);
+	return (write(STDOUT_FILENO, &c, 1));
 }

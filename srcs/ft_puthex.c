@@ -6,7 +6,7 @@
 /*   By: irabelo <irabelo@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/10 22:04:10 by irabelo           #+#    #+#             */
-/*   Updated: 2026/11/11 18:15:41 by irabelo          ###   ########.fr       */
+/*   Updated: 2026/11/11 21:35:07 by irabelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,23 @@
 
 int	ft_puthex(uintptr_t ptr, char type)
 {
-	int			count;
 	const char	*hex;
+	int			count;
+	int			written;
 
-	count = 0;
 	if (type == 'x' || type == 'p')
 		hex = HEX_LOWER;
 	else
 		hex = HEX_UPPER;
+	count = 0;
 	if (ptr >= 16)
 	{
-		count += ft_puthex(ptr / 16, type);
-		count += ft_putchar(hex[ptr % 16]);
+		count = ft_puthex(ptr / 16, type);
+		if (count < 0)
+			return (-1);
 	}
-	else
-		count += ft_putchar(hex[ptr % 16]);
-	return (count);
+	written = ft_putchar(hex[ptr % 16]);
+	if (written != 1)
+		return (-1);
+	return (count + written);
 }

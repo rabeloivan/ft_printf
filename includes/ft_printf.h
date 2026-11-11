@@ -6,7 +6,7 @@
 /*   By: irabelo <irabelo@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/09 19:30:28 by irabelo           #+#    #+#             */
-/*   Updated: 2026/11/11 18:22:57 by irabelo          ###   ########.fr       */
+/*   Updated: 2026/11/11 22:38:49 by irabelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 int	ft_printf(const char *format, ...);
 int	ft_putchar(char c);
 int	ft_putstr(const char *str);
+int	ft_putptr(void *ptr);
 int	ft_putnbr(int nbr);
 int	ft_putunbr(unsigned int nbr);
 int	ft_puthex(uintptr_t ptr, char type);
