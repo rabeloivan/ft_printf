@@ -1,18 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isascii.c                                       :+:      :+:    :+:   */
+/*   ft_putunbr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: irabelo <irabelo@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/29 10:52:11 by irabelo           #+#    #+#             */
-/*   Updated: 2026/11/09 19:27:24 by irabelo          ###   ########.fr       */
+/*   Created: 2026/11/10 21:25:43 by irabelo           #+#    #+#             */
+/*   Updated: 2026/11/11 00:24:16 by irabelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-int	ft_isascii(int c)
+int	ft_putunbr(unsigned int nbr)
 {
-	return (c >= 0 && c <= 127);
+	unsigned long	num;
+	int				count;
+
+	num = (unsigned long)nbr;
+	count = 0;
+	if (num > 9)
+	{
+		count += ft_putunbr(num / 10);
+		count += ft_putchar((num % 10) + '0');
+	}
+	else
+		count += ft_putchar(num + '0');
+	return (count);
 }

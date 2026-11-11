@@ -5,7 +5,7 @@ CFLAGS	= -Wall -Wextra -Werror
 AR		= ar rcs
 RM		= rm -rf
 
-SRCS	=
+SRCS	= ft_printf.c $(addprefix srcs/, $(addsuffix .c, ft_putchar ft_putstr ft_putnbr ft_putunbr ft_puthex))
 
 OBJS	= $(SRCS:.c=.o)
 
@@ -14,8 +14,8 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	$(AR) $@ $^
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+%.o: %.c includes/ft_printf.h
+	$(CC) $(CFLAGS) -I./includes/ -c $< -o $@
 
 clean:
 	$(RM) $(OBJS)

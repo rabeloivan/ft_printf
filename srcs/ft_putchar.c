@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: irabelo <irabelo@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/29 10:52:31 by irabelo           #+#    #+#             */
-/*   Updated: 2026/11/09 19:29:55 by irabelo          ###   ########.fr       */
+/*   Created: 2026/11/10 21:22:21 by irabelo           #+#    #+#             */
+/*   Updated: 2026/11/11 17:22:18 by irabelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-int	ft_toupper(int c)
+int	ft_putchar(char c)
 {
-	if (c >= 'a' && c <= 'z')
-		return (c - ('a' - 'A'));
-	return (c);
+	ssize_t	len;
+
+	len = write(STDOUT_FILENO, &c, 1);
+	return (len);
 }

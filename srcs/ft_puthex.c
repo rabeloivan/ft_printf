@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*   ft_puthex.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: irabelo <irabelo@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/29 17:43:54 by irabelo           #+#    #+#             */
-/*   Updated: 2026/11/09 19:29:39 by irabelo          ###   ########.fr       */
+/*   Created: 2026/11/10 22:04:10 by irabelo           #+#    #+#             */
+/*   Updated: 2026/11/11 18:15:41 by irabelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-char	*ft_strnstr(const char *big, const char *little, size_t len)
+int	ft_puthex(uintptr_t ptr, char type)
 {
-	size_t	little_len;
-	size_t	offset;
+	int			count;
+	const char	*hex;
 
-	if (!little[0])
-		return ((char *)big);
-	little_len = ft_strlen(little);
-	offset = 0;
-	while (offset + little_len <= len && big[offset])
+	count = 0;
+	if (type == 'x' || type == 'p')
+		hex = HEX_LOWER;
+	else
+		hex = HEX_UPPER;
+	if (ptr >= 16)
 	{
-		if (!ft_strncmp(big + offset, little, little_len))
-			return ((char *)(big + offset));
-		offset++;
+		count += ft_puthex(ptr / 16, type);
+		count += ft_putchar(hex[ptr % 16]);
 	}
-	return (NULL);
+	else
+		count += ft_putchar(hex[ptr % 16]);
+	return (count);
 }
