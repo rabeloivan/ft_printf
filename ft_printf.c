@@ -6,7 +6,7 @@
 /*   By: irabelo <irabelo@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/09 19:37:01 by irabelo           #+#    #+#             */
-/*   Updated: 2026/11/11 22:41:05 by irabelo          ###   ########.fr       */
+/*   Updated: 2026/11/12 20:25:05 by irabelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ static int	ft_is_valid_type(char type)
 	size_t	offset;
 
 	offset = 0;
-	while (CHARSET[offset])
+	while (TYPESET[offset])
 	{
-		if (CHARSET[offset] == type)
+		if (TYPESET[offset] == type)
 			return (1);
 		offset++;
 	}
@@ -63,8 +63,8 @@ static int	ft_print_next(const char *format, size_t *offset, va_list *args)
 int	ft_printf(const char *format, ...)
 {
 	va_list	args;
-	int		len;
 	int		written;
+	int		len;
 	size_t	offset;
 
 	if (!format)

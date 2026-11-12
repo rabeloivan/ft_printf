@@ -6,7 +6,7 @@
 /*   By: irabelo <irabelo@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/09 19:30:28 by irabelo           #+#    #+#             */
-/*   Updated: 2026/11/11 22:38:49 by irabelo          ###   ########.fr       */
+/*   Updated: 2026/11/12 19:07:50 by irabelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stddef.h>
 # include <stdint.h>
 
-# define CHARSET "cspdiuxX"
+# define TYPESET "cspdiuxX"
 # define HEX_LOWER "0123456789abcdef"
 # define HEX_UPPER "0123456789ABCDEF"
 
