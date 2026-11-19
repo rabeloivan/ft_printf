@@ -6,26 +6,21 @@
 /*   By: irabelo <irabelo@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/18 23:10:08 by irabelo           #+#    #+#             */
-/*   Updated: 2026/11/19 00:08:57 by irabelo          ###   ########.fr       */
+/*   Updated: 2026/11/19 18:31:04 by irabelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_puthex(uintptr_t nbr, char type)
+int	ft_puthex(uintptr_t nbr, const char *hex)
 {
-	const char	*hex;
-	int			count;
-	int			written;
+	int	count;
+	int	written;
 
-	if (type == 'p' || type == 'x')
-		hex = HEX_LOWER;
-	else
-		hex = HEX_UPPER;
 	count = 0;
 	if (nbr >= 16)
 	{
-		count = ft_puthex(nbr / 16, type);
+		count = ft_puthex(nbr / 16, hex);
 		if (count == -1)
 			return (-1);
 	}

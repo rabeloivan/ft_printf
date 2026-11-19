@@ -6,7 +6,7 @@
 /*   By: irabelo <irabelo@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/18 23:00:06 by irabelo           #+#    #+#             */
-/*   Updated: 2026/11/19 01:37:25 by irabelo          ###   ########.fr       */
+/*   Updated: 2026/11/19 18:32:16 by irabelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,10 @@ static int	ft_print_type(char type, va_list *args)
 		return (ft_putnbr(va_arg(*args, int)));
 	if (type == 'u')
 		return (ft_putunbr(va_arg(*args, unsigned int)));
-	if (type == 'x' || type == 'X')
-		return (ft_puthex(va_arg(*args, unsigned int), type));
+	if (type == 'x')
+		return (ft_puthex(va_arg(*args, unsigned int), HEX_LOWER));
+	if (type == 'X')
+		return (ft_puthex(va_arg(*args, unsigned int), HEX_UPPER));
 	return (ft_putchar('%'));
 }
 
