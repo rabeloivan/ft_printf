@@ -185,7 +185,7 @@ The solution is to divide the number by the base repeatedly, stacking the calls 
 
 - `ft_putnbr()` — converts signed integers to base 10. It uses `long` to handle negative values correctly, including `INT_MIN`, and prints the sign separately.
 - `ft_putunbr()` — converts unsigned integers to base 10.
-- `ft_puthex()` — converts values to base 16, selecting the character table according to the conversion type. It takes a `uintptr_t`, an unsigned integer type large enough to hold a pointer, so the same function handles both the 32-bit `unsigned int` of `%x` / `%X` and the 64-bit address of `%p`.
+- `ft_puthex()` — converts values to base 16, using the character table it receives as an argument. It takes a `uintptr_t`, an unsigned integer type large enough to hold a pointer, so the same function handles both the 32-bit `unsigned int` of `%x` / `%X` and the 64-bit address of `%p`.
 
 **Example with `2147483647` in base 10:**
 ```
@@ -292,17 +292,17 @@ Since the internal representation of `va_list` is platform-dependent, using a po
 
 ### Lookup Tables for Hexadecimal Conversion
 
-**Function:** `ft_puthex()`.
+**Functions:** `ft_print_type()`, `ft_putptr()` and `ft_puthex()`.
 
 Hexadecimal conversion uses two macros defined in `ft_printf.h`:
 
 - `HEX_LOWER` — `"0123456789abcdef"`
 - `HEX_UPPER` — `"0123456789ABCDEF"`
 
-These strings work as **lookup tables**: a value from 0 to 15 is converted directly into its hexadecimal character, using `% 16` as the table index. `ft_puthex()` selects the table according to its `type` argument:
+These strings work as **lookup tables**: a value from 0 to 15 is converted directly into its hexadecimal character, using `% 16` as the table index. The table is chosen once, by the caller, and passed to `ft_puthex()`:
 
-- `x` or `p` — uses `HEX_LOWER`.
-- `X` — uses `HEX_UPPER`.
+- `ft_print_type()` — passes `HEX_LOWER` for `%x` and `HEX_UPPER` for `%X`.
+- `ft_putptr()` — passes `HEX_LOWER` for `%p`.
 
 **Example with `42` in base 16:**
 ```
@@ -325,7 +325,8 @@ Returning from the calls:
 
 - They make the purpose of the characters explicit, which makes the code easier to read and maintain.
 - They avoid repeating string literals in different parts of the code.
-- They let `ft_puthex()` handle `%x`, `%X` and `%p`: printing uppercase letters only requires the other table, with no change to the conversion algorithm.
+- They let `ft_puthex()` handle `%x`, `%X` and `%p`: printing uppercase letters only requires passing the other table, with no change to the conversion algorithm.
+- Since the caller passes the table directly, the choice is made only once, instead of being repeated at every recursive call.
 
 ### String Traversal
 
