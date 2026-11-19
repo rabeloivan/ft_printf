@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: irabelo <irabelo@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/11/10 21:22:21 by irabelo           #+#    #+#             */
-/*   Updated: 2026/11/11 21:26:18 by irabelo          ###   ########.fr       */
+/*   Created: 2026/11/18 23:01:05 by irabelo           #+#    #+#             */
+/*   Updated: 2026/11/18 23:30:19 by irabelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,7 @@
 
 int	ft_putchar(char c)
 {
-	return (write(STDOUT_FILENO, &c, 1));
+	if (write(STDOUT_FILENO, &c, 1) != 1)
+		return (-1);
+	return (1);
 }

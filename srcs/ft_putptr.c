@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: irabelo <irabelo@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/11/11 22:06:14 by irabelo           #+#    #+#             */
-/*   Updated: 2026/11/11 22:08:09 by irabelo          ###   ########.fr       */
+/*   Created: 2026/11/18 23:10:12 by irabelo           #+#    #+#             */
+/*   Updated: 2026/11/19 00:18:11 by irabelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_putptr(void *ptr)
+int	ft_putptr(const void *ptr)
 {
 	int	count;
 	int	written;
@@ -20,10 +20,10 @@ int	ft_putptr(void *ptr)
 	if (!ptr)
 		return (ft_putstr("(nil)"));
 	count = ft_putstr("0x");
-	if (count < 0)
+	if (count == -1)
 		return (-1);
 	written = ft_puthex((uintptr_t)ptr, 'p');
-	if (written < 0)
+	if (written == -1)
 		return (-1);
 	return (count + written);
 }

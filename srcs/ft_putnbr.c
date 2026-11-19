@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: irabelo <irabelo@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/11/10 21:25:43 by irabelo           #+#    #+#             */
-/*   Updated: 2026/11/11 21:37:50 by irabelo          ###   ########.fr       */
+/*   Created: 2026/11/18 23:09:41 by irabelo           #+#    #+#             */
+/*   Updated: 2026/11/19 15:16:45 by irabelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,15 @@ int	ft_putnbr(int nbr)
 	num = (long)nbr;
 	if (num < 0)
 	{
+		num = -num;
 		if (ft_putchar('-') != 1)
 			return (-1);
-		num = -num;
 	}
 	count = 0;
 	if (num > 9)
 	{
 		count = ft_putnbr(num / 10);
-		if (count < 0)
+		if (count == -1)
 			return (-1);
 	}
 	written = ft_putchar((num % 10) + '0');
